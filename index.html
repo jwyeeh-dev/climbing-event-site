@@ -327,5 +327,22 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
+  
+  <script>
+  // 1) History API로 자동 복원 기능 비활성화
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // 2) 새로고침 직전(beforeunload)에 스크롤 위치를 최상단으로 이동
+  window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+  });
+
+  // 3) 초기 로드 시에도 혹시 모를 위치 남아있다면 강제로 최상단으로
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+  });
+</script>
 </body>
 </html>
