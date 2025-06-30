@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>크루아닌크루 X 클라이팅 교류전</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js for interactivity -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      animation: marquee 25s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+  <!-- Header & Navigation -->
+  <header
+    x-data="{ open: false }"
+    @scroll.window="open = false"
+    class="fixed inset-x-0 top-0 z-50 bg-white/75 backdrop-blur-md"
+  >
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-8 h-16">
+      <a href="#hero" class="text-xl lg:text-2xl font-semibold tracking-tight">
+        크루아닌크루&nbsp;X&nbsp;클라이팅 교류전
+      </a>
+      <nav class="hidden lg:flex space-x-8 text-gray-700">
+        <a href="#overview" class="hover:text-gray-900">개요</a>
+        <a href="#schedule" class="hover:text-gray-900">타임테이블</a>
+        <a href="#teams" class="hover:text-gray-900">조 편성</a>
+        <a href="#programs" class="hover:text-gray-900">프로그램</a>
+        <a href="#location" class="hover:text-gray-900">오시는 길</a>
+        <a href="#sponsors" class="hover:text-gray-900">협찬사</a>
+      </nav>
+      <button @click="open = !open" class="lg:hidden text-gray-700 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor"><path stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <nav
+      x-show="open"
+      @click.away="open = false"
+      x-transition
+      class="lg:hidden bg-white border-t shadow-md"
+    >
+      <a href="#overview"  @click="open=false" class="block px-6 py-3">개요</a>
+      <a href="#schedule"  @click="open=false" class="block px-6 py-3">타임테이블</a>
+      <a href="#teams"     @click="open=false" class="block px-6 py-3">조 편성</a>
+      <a href="#programs"  @click="open=false" class="block px-6 py-3">프로그램</a>
+      <a href="#location"  @click="open=false" class="block px-6 py-3">오시는 길</a>
+      <a href="#sponsors"  @click="open=false" class="block px-6 py-3">협찬사</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative h-screen overflow-hidden">
+    <img src="images/banner.png"
+         alt="크루아닌크루 X 클라이팅 배너"
+         class="absolute inset-0 w-full h-full object-cover"/>
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-white px-4">
+      <h1 class="text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-center">
+        크루아닌크루&nbsp;X&nbsp;클라이팅<br class="hidden md:block"/>클라이밍 교류전
+      </h1>
+      <p class="text-lg lg:text-xl mb-6 text-center">
+        2025년 7월 19일 (토) · 18:00 · 치즈클라이밍(용산)
+      </p>
+      <a href="#programs"
+         class="inline-block bg-white text-gray-900 font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition">
+        프로그램 보기
+      </a>
+    </div>
+  </section>
+
+  <!-- Overview Section -->
+  <section id="overview" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-white">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">행사 개요</h2>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-xl font-semibold mb-2">목적</h3>
+          <p class="leading-relaxed">두 개의 클라이밍 크루가 모여 친목을 다지고 경험을 공유하는 교류 행사입니다. 대항전이 아닌 협력과 네트워킹을 중심으로 진행됩니다.</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-2">참여 인원</h3>
+          <p class="leading-relaxed">총 <span class="font-bold">22명</span> (변동 가능)</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-2">장소</h3>
+          <p class="leading-relaxed">치즈클라이밍 · 서울 용산구 원효로 134 대교빌딩 지하 102호</p>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <h3 class="text-xl font-semibold mb-2">주요 프로그램</h3>
+        <ul class="list-disc pl-5 space-y-2">
+          <li>팀전 찍볼 문제</li>
+          <li>팀전 밸런스 챌린지</li>
+          <li>미니게임</li>
+          <li>경품 추첨</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule Section -->
+  <section id="schedule" class="scroll-mt-16 bg-slate-100 py-20">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">타임테이블</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-300 text-sm md:text-base">
+          <thead class="bg-white">
+            <tr>
+              <th class="px-6 py-4 text-left font-semibold">시간</th>
+              <th class="px-6 py-4 text-left font-semibold">내용</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr><td class="px-6 py-4">17:40 ~ 18:00</td><td class="px-6 py-4">암장 입장 / 스트레칭 / 행사 설명</td></tr>
+            <tr><td class="px-6 py-4">18:00 ~ 19:30</td><td class="px-6 py-4">찍볼 이벤트 진행</td></tr>
+            <tr><td class="px-6 py-4">19:40 ~ 20:30</td><td class="px-6 py-4">밸런스 챌린지 / 미니게임 진행</td></tr>
+            <tr><td class="px-6 py-4">20:30 ~ 21:40</td><td class="px-6 py-4">경품 추첨 / 단체 사진</td></tr>
+            <tr><td class="px-6 py-4">21:40 ~ 22:00</td><td class="px-6 py-4">자유 등반 및 마무리</td></tr>
+            <tr><td class="px-6 py-4">22:00 ~</td><td class="px-6 py-4">뒷풀이 진행</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teams Section -->
+  <section id="teams" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-white">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">조 편성</h2>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- 1조 -->
+      <div class="bg-white rounded-3xl shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-3">1조</h3>
+        <ul class="space-y-1">
+          <li>신용하</li>
+          <li>소현빈</li>
+          <li>김다은</li>
+        </ul>
+      </div>
+      <!-- 2조 -->
+      <div class="bg-white rounded-3xl shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-3">2조</h3>
+        <ul class="space-y-1">
+          <li>이소진</li>
+          <li>김지원</li>
+          <li>유승원</li>
+        </ul>
+      </div>
+      <!-- 3조 -->
+      <div class="bg-white rounded-3xl shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-3">3조</h3>
+        <ul class="space-y-1">
+          <li>이정민</li>
+          <li>황재영</li>
+          <li>조창희</li>
+        </ul>
+      </div>
+      <!-- 4조 -->
+      <div class="bg-white rounded-3xl shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-3">4조</h3>
+        <ul class="space-y-1">
+          <li>서지아</li>
+          <li>박혜민</li>
+          <li>이소영</li>
+        </ul>
+      </div>
+      <!-- 5조 -->
+      <div class="bg-white rounded-3xl shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-3">5조</h3>
+        <ul class="space-y-1">
+          <li>오영신</li>
+          <li>김채록</li>
+          <li>이예슬</li>
+        </ul>
+      </div>
+      <!-- 6조 -->
+      <div class="bg-white rounded-3xl shadow-md p-6">
+        <h3 class="text-xl font-semibold mb-3">6조</h3>
+        <ul class="space-y-1">
+          <li>김상우</li>
+          <li>한유나</li>
+          <li>김보현</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section id="programs" class="scroll-mt-16 bg-slate-100 py-20">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">프로그램 설명 및 규칙</h2>
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="rules/shootboulder-rules.html" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
+          <img src="images/shootboulder-thumb.png" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">팀별 찍볼 대전</h3>
+            <p class="text-gray-600">다양한 난이도의 찍볼 문제를 팀별로 해결하며 팀워크를 높입니다.</p>
+          </div>
+        </a>
+        <a href="rules/balance-rules.html" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
+          <img src="images/balance-thumb.jpg" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">팀별 밸런스 챌린지</h3>
+            <p class="text-gray-600">균형 감각을 겨루는 밸런스 챌린지로 즐거운 경쟁을 유도합니다.</p>
+          </div>
+        </a>
+        <a href="rules/minigame-rules.html" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
+          <img src="images/minigame-thumb.jpg" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">미니게임</h3>
+            <p class="text-gray-600">가볍게 즐길 수 있는 다양한 미니게임으로 재미를 더합니다.</p>
+          </div>
+        </a>
+        <a href="rules/randomgatcha-rules.html" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
+          <img src="images/gatcha-thumb.jpg" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">경품 추첨</h3>
+            <p class="text-gray-600">후원사가 제공한 선물을 랜덤 추첨으로 증정합니다.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- Location Section (Kakao Map) -->
+  <section id="location" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">📍 오시는 길</h2>
+    <div class="w-full h-96 rounded-xl shadow-lg overflow-hidden mb-8">
+      <div id="kakaoMap" class="w-full h-full"></div>
+    </div>
+    <div class="text-center text-gray-700 space-y-2">
+      <p class="text-lg font-semibold">치즈클라이밍</p>
+      <p>서울 용산구 원효로 134 대교빌딩 지하 102호</p>
+      <p class="text-sm">🚇 용산역 3번 출구 도보 약 8분 | 🚌 버스 162, 501 등 ‘원효로3가’ 정류장 하차</p>
+    </div>
+  </section>
+
+  <!-- Sponsors Section -->
+  <section id="sponsors" class="scroll-mt-16 py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">🤝 협찬</h2>
+      <div class="relative overflow-hidden">
+        <div class="flex items-center gap-16 whitespace-nowrap animate-marquee">
+          <img src="images/bouderland_temp.png" alt="Bouderland" class="h-16 object-contain"/>
+          <img src="images/gaza_logo_temp.png"  alt="Gaza"       class="h-16 object-contain"/>
+          <img src="images/linteazero_temp.png" alt="LinTeaZero" class="h-16 object-contain"/>
+          <img src="images/tapers_temp.png"      alt="Tapers"     class="h-16 object-contain"/>
+          <!-- 복제 세트 -->
+          <img src="images/bouderland_temp.png" alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
+          <img src="images/gaza_logo_temp.png"  alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
+          <img src="images/linteazero_temp.png" alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
+          <img src="images/tapers_temp.png"      alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 py-12">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center text-gray-600 space-y-4">
+      <nav class="flex justify-center space-x-6">
+        <a href="#hero"     class="hover:text-gray-900">Home</a>
+        <a href="#overview" class="hover:text-gray-900">개요</a>
+        <a href="#programs" class="hover:text-gray-900">프로그램</a>
+        <a href="#sponsors" class="hover:text-gray-900">협찬사</a>
+        <a href="#location" class="hover:text-gray-900">오시는 길</a>
+      </nav>
+      <p>© 2025 크루아닌크루 X 클라이팅. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button
+    id="backToTop"
+    class="hidden fixed bottom-6 right-6 transform -translate-x-1/2 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity"
+    aria-label="맨 위로 이동"
+  >
+    ↑ Top
+  </button>
+
+  <!-- Kakao Maps SDK -->
+  <script
+  src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=41947edd54f5f95054395aad62bb6837&libraries=services"
+  integrity="" crossorigin="anonymous">
+</script>
+  <script>
+    // Kakao Map 초기화
+    const container = document.getElementById('kakaoMap');
+    const options = {
+      center: new kakao.maps.LatLng(37.5336, 126.9581), 
+      level: 3
+    };
+    const map = new kakao.maps.Map(container, options);
+    const markerPosition = new kakao.maps.LatLng(37.5336, 126.9581);
+    new kakao.maps.Marker({
+      position: markerPosition,
+      map: map
+    });
+
+    // Back to Top 스크립트
+    const btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) btn.classList.remove('hidden');
+      else btn.classList.add('hidden');
+    });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  
+  <script>
+  // 1) History API로 자동 복원 기능 비활성화
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // 2) 새로고침 직전(beforeunload)에 스크롤 위치를 최상단으로 이동
+  window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+  });
+
+  // 3) 초기 로드 시에도 혹시 모를 위치 남아있다면 강제로 최상단으로
+  window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+  });
+</script>
+</body>
+</html>
