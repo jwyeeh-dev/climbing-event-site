@@ -242,11 +242,11 @@
 
   
 
-  <!-- Location Section -->
+  <!-- Location Section (Kakao Map) -->
   <section id="location" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
     <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">📍 오시는 길</h2>
     <div class="w-full h-96 rounded-xl shadow-lg overflow-hidden mb-8">
-      <div id="naverMap" class="w-full h-full"></div>
+      <div id="kakaoMap" class="w-full h-full"></div>
     </div>
     <div class="text-center text-gray-700 space-y-2">
       <p class="text-lg font-semibold">치즈클라이밍</p>
@@ -298,19 +298,20 @@
     ↑ Top
   </button>
 
-  <!-- Naver Map SDK -->
-  <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"></script>
+  <!-- Kakao Maps SDK -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY"></script>
   <script>
-    // Naver Map 초기화
-    const map = new naver.maps.Map('naverMap', {
-      center: new naver.maps.LatLng(37.5369, 126.9605),
-      zoom: 16,
-      mapTypeControl: true
-    });
-    new naver.maps.Marker({
-      position: new naver.maps.LatLng(37.5369, 126.9605),
-      map: map,
-      title: '치즈클라이밍'
+    // Kakao Map 초기화
+    const container = document.getElementById('kakaoMap');
+    const options = {
+      center: new kakao.maps.LatLng(37.5369, 126.9605), // 실제 좌표로 교체하세요
+      level: 3
+    };
+    const map = new kakao.maps.Map(container, options);
+    const markerPosition = new kakao.maps.LatLng(37.5369, 126.9605);
+    new kakao.maps.Marker({
+      position: markerPosition,
+      map: map
     });
 
     // Back to Top 스크립트

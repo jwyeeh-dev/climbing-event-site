@@ -1,0 +1,24 @@
+name: CI / CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 체크아웃 코드
+        uses: actions/checkout@v4
+
+      - name: Kakao 키 삽입
+        run: |
+          sed -i "s/YOUR_APP_KEY/${{ secrets.KAKAO_JS_KEY }}/g" index.html
+
+      - name: GitHub Pages 배포
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./
