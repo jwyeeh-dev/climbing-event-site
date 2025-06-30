@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>팀전 찍볼 규칙 | CLIMB & CONNECT</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-slate-50 text-gray-800 leading-relaxed">
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+    <h1 class="text-lg font-bold">팀전 찍볼 규칙</h1>
+    <a href="../index.html#programs" class="text-sm text-blue-600 hover:underline flex items-center">← 메인 페이지로</a>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+  <!-- Rule Description -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-4">📌 경기 방식</h2>
+    <p>
+      3인 1팀이 되어 크루장이 지정한 <strong>찍볼 문제</strong>를 풉니다.
+      개인별 실력에 따라 A · B · C 로 구분되며,
+      난이도(어려움 · 보통 · 쉬움)에 따라 아래 점수를 획득합니다.
+      경기 종료 후 <em>팀원 3명의 점수 합산</em>으로 순위가 결정됩니다.
+    </p>
+  </section>
+
+  <!-- Score Table -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-4">🏆 실력·난이도별 점수</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-center border divide-y divide-gray-300 bg-white rounded-xl shadow-sm">
+        <thead class="bg-slate-100">
+          <tr>
+            <th class="px-4 py-3">구분</th>
+            <th class="px-4 py-3">어려움</th>
+            <th class="px-4 py-3">보통</th>
+            <th class="px-4 py-3">쉬움</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr>
+            <th class="px-4 py-3 bg-slate-50">A</th>
+            <td class="px-4 py-3">3</td>
+            <td class="px-4 py-3">2</td>
+            <td class="px-4 py-3">1</td>
+          </tr>
+          <tr>
+            <th class="px-4 py-3 bg-slate-50">B</th>
+            <td class="px-4 py-3">6</td>
+            <td class="px-4 py-3">3</td>
+            <td class="px-4 py-3">2</td>
+          </tr>
+          <tr>
+            <th class="px-4 py-3 bg-slate-50">C</th>
+            <td class="px-4 py-3">100</td>
+            <td class="px-4 py-3">4</td>
+            <td class="px-4 py-3">3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Problem Gallery with Lightbox -->
+  <section x-data="lightbox()" class="relative">
+    <h2 class="text-2xl font-semibold mb-6">🖼️ 문제 이미지 (난이도별 3개)</h2>
+
+    <div x-data="{tab:'easy'}" class="space-y-8">
+
+      <!-- Tabs -->
+      <div class="flex gap-2">
+        <button @click="tab='easy'" :class="tab==='easy' ? 'bg-blue-600 text-white' : 'bg-white text-gray-800'"
+                class="px-4 py-1.5 rounded-full text-sm border shadow">쉬움</button>
+        <button @click="tab='normal'" :class="tab==='normal' ? 'bg-blue-600 text-white' : 'bg-white text-gray-800'"
+                class="px-4 py-1.5 rounded-full text-sm border shadow">보통</button>
+        <button @click="tab='hard'" :class="tab==='hard' ? 'bg-blue-600 text-white' : 'bg-white text-gray-800'"
+                class="px-4 py-1.5 rounded-full text-sm border shadow">어려움</button>
+      </div>
+
+      <!-- 쉬움 -->
+      <div x-show="tab==='easy'" x-transition class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <img @click="open('../images/easy1.jpg')" src="../images/easy1.jpg" alt="쉬움 문제 1" class="rounded-xl shadow-md cursor-zoom-in">
+        <img @click="open('../images/easy2.jpg')" src="../images/easy2.jpg" alt="쉬움 문제 2" class="rounded-xl shadow-md cursor-zoom-in">
+        <img @click="open('../images/easy3.jpg')" src="../images/easy3.jpg" alt="쉬움 문제 3" class="rounded-xl shadow-md cursor-zoom-in">
+      </div>
+
+      <!-- 보통 -->
+      <div x-show="tab==='normal'" x-transition class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <img @click="open('../images/normal1.jpg')" src="../images/normal1.jpg" alt="보통 문제 1" class="rounded-xl shadow-md cursor-zoom-in">
+        <img @click="open('../images/normal2.jpg')" src="../images/normal2.jpg" alt="보통 문제 2" class="rounded-xl shadow-md cursor-zoom-in">
+        <img @click="open('../images/normal3.jpg')" src="../images/normal3.jpg" alt="보통 문제 3" class="rounded-xl shadow-md cursor-zoom-in">
+      </div>
+
+      <!-- 어려움 -->
+      <div x-show="tab==='hard'" x-transition class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <img @click="open('../images/hard1.jpg')" src="../images/hard1.jpg" alt="어려움 문제 1" class="rounded-xl shadow-md cursor-zoom-in">
+        <img @click="open('../images/hard2.jpg')" src="../images/hard2.jpg" alt="어려움 문제 2" class="rounded-xl shadow-md cursor-zoom-in">
+        <img @click="open('../images/hard3.jpg')" src="../images/hard3.jpg" alt="어려움 문제 3" class="rounded-xl shadow-md cursor-zoom-in">
+      </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <template x-if="isOpen">
+      <div x-show="isOpen" x-transition.opacity @keydown.window.escape="close" @click.self="close"
+           class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4">
+        <img :src="currentSrc" alt="선택한 문제 확대보기"
+             class="max-h-full max-w-full rounded-lg shadow-2xl" @click.stop>
+      </div>
+    </template>
+  </section>
+
+  <!-- Back Button -->
+  <div class="text-center">
+    <a href="../index.html#programs"
+       class="inline-block mt-10 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-2xl shadow">
+      프로그램 목록으로 돌아가기
+    </a>
+  </div>
+</main>
+
+<!-- Lightbox component script -->
+<script>
+function lightbox() {
+  return {
+    isOpen: false,
+    currentSrc: '',
+    open(src) {
+      this.currentSrc = src;
+      this.isOpen = true;
+      document.body.classList.add('overflow-hidden');
+    },
+    close() {
+      this.isOpen = false;
+      this.currentSrc = '';
+      document.body.classList.remove('overflow-hidden');
+    }
+  }
+}
+</script>
+</body>
+</html>
