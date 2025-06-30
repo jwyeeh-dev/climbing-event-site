@@ -21,9 +21,9 @@ jobs:
         run: |
           sed -i "s/YOUR_APP_KEY/${{ secrets.KAKAO_JS_KEY }}/g" index.html
 
-      - name: GitHub Pages 배포
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAGES_PAT }}     # PAT 사용
           publish_branch: gh-pages
           publish_dir: ./
