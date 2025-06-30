@@ -9,6 +9,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js for simple interactivity (mobile menu toggle) -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+     <style>
+        /* 스크롤 시 상단에 64px 패딩 */
+        html {
+        scroll-padding-top: 30px;
+        scroll-behavior: smooth; /* 부드러운 스크롤(선택) */
+        }
+    </style>
 </head>
 <body class="bg-slate-50 text-gray-800">
 
@@ -58,7 +65,7 @@
         <h1 class="text-4xl md:text-6xl font-extrabold mb-4">크루아닌크루 X 클라이팅 교류전</h1>
         <p class="text-lg md:text-2xl">2025년 7월 19일 (토) · 18:00 · 치즈클라이밍(용산)</p>
         <a href="#programs"
-        class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full text-white font-semibold">
+        class="mt-6 inline-block bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-full text-white font-semibold">
         프로그램 보기
         </a>
     </div>
@@ -179,11 +186,11 @@
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Program Card (Clickable link to rules page) -->
                 <a href="rules/shootboulder-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
-                    <h3 class="text-xl font-semibold">팀 전 찍볼 문제</h3>
+                    <h3 class="text-xl font-semibold">팀별 찍볼 대전</h3>
                     <p>다양한 난이도의 찍볼 문제를 팀별로 해결하며 팀워크를 높입니다.</p>
                 </a>
                 <a href="rules/balance-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
-                    <h3 class="text-xl font-semibold">팀전 밸런스 챌린지</h3>
+                    <h3 class="text-xl font-semibold">팀별 밸런스 챌린지</h3>
                     <p>균형 감각을 겨루는 밸런스 챌린지로 즐거운 경쟁을 유도합니다.</p>
                 </a>
                 <a href="rules/minigame-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
