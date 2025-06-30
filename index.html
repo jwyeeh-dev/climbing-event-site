@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CLIMB & CONNECT (가제)</title>
+    <title>크루아닌크루 X 클라이팅 교류전 (가제)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js for simple interactivity (mobile menu toggle) -->
@@ -15,7 +15,7 @@
     <!-- Header & Navigation -->
     <header class="bg-white shadow fixed top-0 inset-x-0 z-50" x-data="{ open:false }">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold tracking-tight">CLIMB & CONNECT (가제)</a>
+            <a href="#" class="text-2xl font-bold tracking-tight">크루아닌크루 X 클라이팅 교류전 (가제)</a>
             <nav class="hidden md:flex space-x-6 text-sm font-medium">
                 <a href="#overview" class="hover:text-blue-600">개요</a>
                 <a href="#schedule" class="hover:text-blue-600">타임테이블</a>
@@ -45,12 +45,23 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 bg-gradient-to-b from-blue-600 to-blue-400 text-white text-center">
-        <div class="max-w-3xl mx-auto px-6">
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">CLIMB & CONNECT (가제)</h1>
-            <p class="text-lg md:text-xl mb-6">2025년 7월 19일 (토) · 18:00 – 22:00 · 치즈클라이밍 (서울 용산구)</p>
-            <a href="#overview" class="inline-block bg-white text-blue-600 font-semibold px-6 py-3 rounded-2xl shadow hover:bg-slate-100 transition">행사 살펴보기</a>
-        </div>
+    <section
+        id="hero"
+        class="relative h-[60vh] min-h-[400px] bg-cover bg-center bg-no-repeat"
+        style="background-image: url('images/banner.png')"
+    >
+    <!-- 어두운 오버레이 -->
+    <div class="absolute inset-0 bg-black/50"></div>
+
+    <!-- 텍스트 컨테이너 -->
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-white px-4">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4">크루아닌크루 X 클라이팅 교류전</h1>
+        <p class="text-lg md:text-2xl">2025년 7월 19일 (토) · 18:00 · 치즈클라이밍(용산)</p>
+        <a href="#programs"
+        class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full text-white font-semibold">
+        프로그램 보기
+        </a>
+    </div>
     </section>
 
     <!-- Overview Section -->
@@ -171,11 +182,11 @@
                     <h3 class="text-xl font-semibold">팀 전 찍볼 문제</h3>
                     <p>다양한 난이도의 찍볼 문제를 팀별로 해결하며 팀워크를 높입니다.</p>
                 </a>
-                <a href="rules/shootboulder-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
+                <a href="rules/balance-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
                     <h3 class="text-xl font-semibold">팀전 밸런스 챌린지</h3>
                     <p>균형 감각을 겨루는 밸런스 챌린지로 즐거운 경쟁을 유도합니다.</p>
                 </a>
-                <a href="rules/shootboulder-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
+                <a href="rules/minigame-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
                     <h3 class="text-xl font-semibold">미니게임</h3>
                     <p>가볍게 즐길 수 있는 다양한 게임으로 재미를 더합니다.</p>
                 </a>
