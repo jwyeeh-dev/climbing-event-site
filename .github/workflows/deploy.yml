@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: 체크아웃 코드
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0     # 전체 히스토리 가져오기
 
       - name: Kakao 키 삽입
         run: |
