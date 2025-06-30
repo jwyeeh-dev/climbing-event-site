@@ -38,8 +38,7 @@
             </button>
         </div>
         <!-- Mobile menu -->
-        <div  x-show="open" x-transition class="lg:hidden bg-white border-t shadow" @click.away="open = false">
-            <nav x-show="open" x-transition class="lg:hidden bg-white border-t shadow" @click.away="open = false">
+        <nav x-show="open" x-transition class="lg:hidden bg-white border-t shadow" @click.away="open = false">
             <a @click="open=false" href="#overview"  class="block px-6 py-3">대회 소개</a>
             <a @click="open=false" href="#timetable" class="block px-6 py-3">타임테이블</a>
             <a @click="open=false" href="#teams"     class="block px-6 py-3">조 편성</a>
@@ -48,7 +47,6 @@
             <a @click="open=false" href="#location"  class="block px-6 py-3">오시는 길</a>
         </nav>
            
-        </div>
     </header>
 
     <!-- Hero Section -->
