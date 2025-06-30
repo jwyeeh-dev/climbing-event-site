@@ -38,16 +38,16 @@
             </button>
         </div>
         <!-- Mobile menu -->
-        <div x-show="open" x-transition class="md:hidden bg-white border-t border-gray-200">
-            <nav class="px-4 py-4 space-y-2 text-sm font-medium">
-                <a href="#overview" class="block hover:text-blue-600">개요</a>
-                <a href="#schedule" class="block hover:text-blue-600">타임테이블</a>
-                <a href="#teams" class="block hover:text-blue-600">조 편성</a>
-                <a href="#programs" class="block hover:text-blue-600">프로그램</a>
-                <a href="#sponsors" class="block hover:text-blue-600">협찬사</a>
-                <a href="#location" class="block hover:text-blue-600">오시는 길</a>
-
-            </nav>
+        <div  x-show="open" x-transition class="lg:hidden bg-white border-t shadow" @click.away="open = false">
+            <nav x-show="open" x-transition class="lg:hidden bg-white border-t shadow" @click.away="open = false">
+            <a @click="open=false" href="#overview"  class="block px-6 py-3">대회 소개</a>
+            <a @click="open=false" href="#timetable" class="block px-6 py-3">타임테이블</a>
+            <a @click="open=false" href="#teams"     class="block px-6 py-3">조 편성</a>
+            <a @click="open=false" href="#programs"  class="block px-6 py-3">프로그램</a>
+            <a @click="open=false" href="#sponsors"  class="block px-6 py-3">협찬사</a>
+            <a @click="open=false" href="#location"  class="block px-6 py-3">오시는 길</a>
+        </nav>
+           
         </div>
     </header>
 
@@ -182,7 +182,7 @@
     <!-- Programs Section -->
     <section id="programs" class="bg-slate-100 py-16">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-6 text-center md:text-left">프로그램 세부</h2>
+            <h2 class="text-3xl font-bold mb-6 text-center md:text-left">프로그램 설명 및 규칙</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Program Card (Clickable link to rules page) -->
                 <a href="rules/shootboulder-rules.html" class="block bg-white rounded-2xl shadow p-6 space-y-3 hover:ring-2 ring-blue-400 transition">
