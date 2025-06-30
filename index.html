@@ -232,7 +232,7 @@
 </style>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 text-white py-6">
+    <footer class="bg-yellow-500 text-white py-6">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm">
             <p>© 2025 WeAreNotCrew · All rights reserved.</p>
             <div class="space-x-4">
@@ -242,5 +242,32 @@
         </div>
     </footer>
 
+<button
+    id="backToTop"
+    class="hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity"
+    aria-label="Back to Top"
+  >
+    ↑ Top
+  </button>
+
+  <script>
+    const btn = document.getElementById('backToTop');
+
+    // 스크롤 위치에 따라 버튼 보이기/숨기기
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        btn.classList.remove('hidden');
+        btn.classList.add('opacity-100');
+      } else {
+        btn.classList.add('hidden');
+        btn.classList.remove('opacity-100');
+      }
+    });
+
+    // 클릭 시 부드럽게 맨 위로
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
