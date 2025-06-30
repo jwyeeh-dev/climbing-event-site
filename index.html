@@ -243,37 +243,40 @@
   
 
   <!-- Location Section (Kakao Map) -->
+  <!-- 1️⃣ 지도 컨테이너 추가 -->
   <section id="location" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
     <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">📍 오시는 길</h2>
-    <div class="w-full h-96 rounded-xl shadow-lg overflow-hidden mb-8">
-      <div id="kakaoMap" class="w-full h-full"></div>
-    </div>
-    <div class="text-center text-gray-700 space-y-2">
-      <p class="text-lg font-semibold">치즈클라이밍</p>
+
+    <!-- 이 div 가 지도를 담을 영역입니다 -->
+    <div id="map" style="width:500px; height:400px; margin:0 auto; border-radius:8px; overflow:hidden;"></div>
+
+    <div class="mt-6 text-center text-gray-700">
+      <p class="font-semibold">치즈클라이밍</p>
       <p>서울 용산구 원효로 134 대교빌딩 지하 102호</p>
-      <p class="text-sm">🚇 용산역 3번 출구 도보 약 8분 | 🚌 버스 162, 501 등 ‘원효로3가’ 정류장 하차</p>
     </div>
   </section>
 
-  <!-- Sponsors Section -->
-  <section id="sponsors" class="scroll-mt-16 py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-gray-900 mb-12">🤝 협찬</h2>
-      <div class="relative overflow-hidden">
-        <div class="flex items-center gap-16 whitespace-nowrap animate-marquee">
-          <img src="images/bouderland_temp.png" alt="Bouderland" class="h-16 object-contain"/>
-          <img src="images/gaza_logo_temp.png"  alt="Gaza"       class="h-16 object-contain"/>
-          <img src="images/linteazero_temp.png" alt="LinTeaZero" class="h-16 object-contain"/>
-          <img src="images/tapers_temp.png"      alt="Tapers"     class="h-16 object-contain"/>
-          <!-- 복제 세트 -->
-          <img src="images/bouderland_temp.png" alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
-          <img src="images/gaza_logo_temp.png"  alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
-          <img src="images/linteazero_temp.png" alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
-          <img src="images/tapers_temp.png"      alt="" class="h-16 object-contain opacity-0 pointer-events-none" aria-hidden="true"/>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- 2️⃣ Kakao Maps JavaScript API 로드 -->
+  <script
+    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=41947edd54f5f95054395aad62bb6837&libraries=services"
+    integrity=""
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- 3️⃣ 지도를 실제로 그리는 스크립트 -->
+  <script>
+    // HTML 안에 선언된 <div id="map"> 요소를 참조
+    var container = document.getElementById('map');
+    var options = {
+      // 원하는 위도,경도로 변경하세요 (예: 치즈클라이밍)
+      center: new kakao.maps.LatLng(37.5369, 126.9605),
+      level: 3  // 1~14 단계, 숫자가 작을수록 확대
+    };
+
+    // Map 객체를 생성하면서 지도를 띄웁니다
+    var map = new kakao.maps.Map(container, options);
+  </script>
+
 
   <!-- Footer -->
   <footer class="bg-gray-100 py-12">
@@ -307,29 +310,6 @@
     });
     btn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
-
-  <!-- 1) SDK를 autoload=false 로 로드 -->
-  <script
-    type="text/javascript"
-    src="https://dapi.kakao.com/v2/maps/sdk.js?
-           appkey=41947edd54f5f95054395aad62bb6837
-           &libraries=services
-           &autoload=false"
-  ></script>
-
-  <!-- 2) SDK가 완전히 로드된 뒤에 init -->
-  <script>
-    //  sdk.js 에서 autoload=false 로 설정했기 때문에
-    //  kakao.maps.load 콜백 안에서만 kakao 객체를 사용할 수 있습니다.
-    kakao.maps.load(function() {
-      const container = document.getElementById('kakaoMap');
-      const options = {
-        center: new kakao.maps.LatLng(37.5369, 126.9605), // 실제 좌표
-        level: 3
-      };
-      new kakao.maps.Map(container, options);
     });
   </script>
 
