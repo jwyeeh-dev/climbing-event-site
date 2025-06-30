@@ -43,7 +43,7 @@
         <a href="#schedule" class="hover:text-gray-900">타임테이블</a>
         <a href="#teams" class="hover:text-gray-900">조 편성</a>
         <a href="#programs" class="hover:text-gray-900">프로그램</a>
-        <a href="#location" class="hover:text-gray-900">오시는 길</a>
+        <a href="#location" class="hover:text-gray-900">장소</a>
         <a href="#sponsors" class="hover:text-gray-900">협찬사</a>
       </nav>
       <button @click="open = !open" class="lg:hidden text-gray-700 focus:outline-none">
@@ -62,7 +62,7 @@
       <a href="#schedule"  @click="open=false" class="block px-6 py-3">타임테이블</a>
       <a href="#teams"     @click="open=false" class="block px-6 py-3">조 편성</a>
       <a href="#programs"  @click="open=false" class="block px-6 py-3">프로그램</a>
-      <a href="#location"  @click="open=false" class="block px-6 py-3">오시는 길</a>
+      <a href="#location"  @click="open=false" class="block px-6 py-3">장소</a>
       <a href="#sponsors"  @click="open=false" class="block px-6 py-3">협찬사</a>
     </nav>
   </header>
@@ -240,43 +240,61 @@
     </div>
   </section>
 
-  
-
-  <!-- Location Section (Kakao Map) -->
-  <!-- 1️⃣ 지도 컨테이너 추가 -->
+  <!-- Location Section (지도 버튼 링크) -->
   <section id="location" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
-    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">📍 오시는 길</h2>
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">📍 장소</h2>
 
-    <!-- 이 div 가 지도를 담을 영역입니다 -->
-    <div id="map" style="width:500px; height:400px; margin:0 auto; border-radius:8px; overflow:hidden;"></div>
+    <!-- 버튼 그룹 -->
+    <div class="flex justify-center gap-6 mb-8">
+      <!-- Naver Map 버튼 -->
+      <a
+        href="https://naver.me/GV2tG1Yg"
+        target="_blank" rel="noopener noreferrer"
+        class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition"
+      >
+        Naver Map
+      </a>
+      <!-- Kakao Map 버튼 -->
+      <a
+        href="https://kko.kakao.com/j_bo9zHI52"
+        target="_blank" rel="noopener noreferrer"
+        class="px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-lg shadow hover:bg-yellow-500 transition"
+      >
+        Kakao Map
+      </a>
+      <!-- Google Map 버튼 -->
+      <a
+        href="https://maps.app.goo.gl/PY66REayjpJxGfrq7"
+        target="_blank" rel="noopener noreferrer"
+        class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition"
+      >
+        Google Map
+      </a>
+    </div>
 
-    <div class="mt-6 text-center text-gray-700">
-      <p class="font-semibold">치즈클라이밍</p>
+    <!-- 주소 및 교통 안내 -->
+    <div class="text-center text-gray-700 space-y-2">
+      <p class="text-lg font-semibold">치즈클라이밍</p>
       <p>서울 용산구 원효로 134 대교빌딩 지하 102호</p>
+      <p class="text-sm">
+        🚇 용산역 3번 출구 도보 약 8분 &nbsp;|&nbsp;
+        🚌 버스 162, 501 등 ‘원효로3가’ 정류장 하차
+      </p>
     </div>
   </section>
 
-  <!-- 2️⃣ Kakao Maps JavaScript API 로드 -->
-  <script
-    src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=41947edd54f5f95054395aad62bb6837&libraries=services"
-    integrity=""
-    crossorigin="anonymous"
-  ></script>
-
-  <!-- 3️⃣ 지도를 실제로 그리는 스크립트 -->
-  <script>
-    // HTML 안에 선언된 <div id="map"> 요소를 참조
-    var container = document.getElementById('map');
-    var options = {
-      // 원하는 위도,경도로 변경하세요 (예: 치즈클라이밍)
-      center: new kakao.maps.LatLng(37.5369, 126.9605),
-      level: 3  // 1~14 단계, 숫자가 작을수록 확대
-    };
-
-    // Map 객체를 생성하면서 지도를 띄웁니다
-    var map = new kakao.maps.Map(container, options);
-  </script>
-
+  <!-- Sponsors Section -->
+  <section id="sponsors" class="scroll-mt-16 py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">🤝 협찬</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-8 justify-items-center items-center">
+        <img src="images/bouderland_temp.png" alt="Bouderland" class="h-20 mx-auto object-contain"/>
+        <img src="images/gaza_logo_temp.png"  alt="Gaza"       class="h-16 mx-auto object-contain"/>
+        <img src="images/linteazero_temp.png" alt="LinTeaZero" class="h-19 mx-auto object-contain"/>
+        <img src="images/tapers_temp.png"      alt="Tapers"     class="h-16 mx-auto object-contain"/>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="bg-gray-100 py-12">
