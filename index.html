@@ -297,26 +297,8 @@
   >
     ↑ Top
   </button>
-
-  <!-- Kakao Maps SDK -->
-  <script
-  src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=41947edd54f5f95054395aad62bb6837&libraries=services"
-  integrity="" crossorigin="anonymous">
-</script>
+  
   <script>
-    // Kakao Map 초기화
-    const container = document.getElementById('kakaoMap');
-    const options = {
-      center: new kakao.maps.LatLng(37.5336, 126.9581), 
-      level: 3
-    };
-    const map = new kakao.maps.Map(container, options);
-    const markerPosition = new kakao.maps.LatLng(37.5336, 126.9581);
-    new kakao.maps.Marker({
-      position: markerPosition,
-      map: map
-    });
-
     // Back to Top 스크립트
     const btn = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
@@ -327,20 +309,33 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
-  
-  <script>
-  // 1) History API로 자동 복원 기능 비활성화
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
 
+  <!-- 1) SDK를 autoload=false 로 로드 -->
+  <script
+    type="text/javascript"
+    src="https://dapi.kakao.com/v2/maps/sdk.js?
+           appkey=41947edd54f5f95054395aad62bb6837
+           &libraries=services
+           &autoload=false"
+  ></script>
+
+  <!-- 2) SDK가 완전히 로드된 뒤에 init -->
+  <script>
+    //  sdk.js 에서 autoload=false 로 설정했기 때문에
+    //  kakao.maps.load 콜백 안에서만 kakao 객체를 사용할 수 있습니다.
+    kakao.maps.load(function() {
+      const container = document.getElementById('kakaoMap');
+      const options = {
+        center: new kakao.maps.LatLng(37.5369, 126.9605), // 실제 좌표
+        level: 3
+      };
+      new kakao.maps.Map(container, options);
+    });
+  </script>
+
+  <script>
   // 2) 새로고침 직전(beforeunload)에 스크롤 위치를 최상단으로 이동
   window.addEventListener('beforeunload', () => {
-    window.scrollTo(0, 0);
-  });
-
-  // 3) 초기 로드 시에도 혹시 모를 위치 남아있다면 강제로 최상단으로
-  window.addEventListener('load', () => {
     window.scrollTo(0, 0);
   });
 </script>
