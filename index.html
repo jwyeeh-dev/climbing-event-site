@@ -240,12 +240,34 @@
     </div>
   </section>
 
-  <!-- Location Section (지도 버튼 링크) -->
-  <section id="location" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
-    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">📍 장소</h2>
-    <div class="w-full h-96 rounded-xl shadow-lg overflow-hidden mb-8">
-      <div id="kakaoMap" class="w-full h-full"></div>
-    </div>
+  <!-- Location Section (Kakao Map Embed) -->
+    <section id="location"
+            class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+        📍 오시는 길
+      </h2>
+
+      <!-- 1) 지도 퍼가기용 컨테이너 -->
+      <div id="daumRoughmapContainer1751335841505"
+          class="root_daum_roughmap root_daum_roughmap_landing mx-auto"
+          style="width:500px; height:400px;">
+      </div>
+
+      <!-- 2) 퍼가기 설치 스크립트 (한 번만) -->
+      <script charset="UTF-8"
+              class="daum_roughmap_loader_script"
+              src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js">
+      </script>
+
+      <!-- 3) 지도 렌더링 스크립트 -->
+      <script charset="UTF-8">
+        new daum.roughmap.Lander({
+          "timestamp" : "1751335841505",  // 퍼가기에서 복사한 값
+          "key"       : "4h76ktqvcww",    // 퍼가기에서 복사한 값
+          "mapWidth"  : "500",            // 컨테이너 가로(px)
+          "mapHeight" : "400"             // 컨테이너 세로(px)
+        }).render();
+      </script>
     <!-- 버튼 그룹 -->
     <div class="flex justify-center gap-6 mb-8">
       <!-- Naver Map 버튼 -->
@@ -333,23 +355,6 @@
     });
   </script>
 
-   <!-- Kakao Maps SDK -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY"></script>
-  <script>
-    // Kakao Map 초기화
-    const container = document.getElementById('kakaoMap');
-    const options = {
-      center: new kakao.maps.LatLng(37.5369, 126.9605), // 실제 좌표로 교체하세요
-      level: 3
-    };
-    const map = new kakao.maps.Map(container, options);
-    const markerPosition = new kakao.maps.LatLng(37.5369, 126.9605);
-    new kakao.maps.Marker({
-      position: markerPosition,
-      map: map
-    });
-  </script>
-  
   <script>
   // 2) 새로고침 직전(beforeunload)에 스크롤 위치를 최상단으로 이동
   window.addEventListener('beforeunload', () => {
