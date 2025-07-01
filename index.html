@@ -228,42 +228,123 @@
     </div>
   </section>
 
-  <!-- Programs Section -->
-  <section id="programs" class="scroll-mt-16 bg-slate-100 py-20" data-aos="fade-up">
-    <div class="max-w-6xl mx-auto px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">프로그램 설명 및 규칙</h2>
-      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-2">
-        <a href="rules/shootboulder-rules.html" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
-          <img src="images/shootboulder-thumb.png" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">팀별 찍볼 대전</h3>
-            <p class="text-gray-600">다양한 난이도의 찍볼 문제를 팀별로 해결하며 팀워크를 높입니다.</p>
+  <!-- Programs Section (규칙 공개 전 오버레이 추가) -->
+<section
+  id="programs"
+  class="scroll-mt-16 bg-slate-100 py-20"
+  data-aos="fade-up"
+>
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+      프로그램 설명 및 규칙
+    </h2>
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-2">
+
+      <!-- 카드 1 -->
+      <a
+        href="rules/shootboulder-rules.html"
+        onclick="event.preventDefault()"
+        class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
+      >
+        <!-- 이미지 + 오버레이 -->
+        <div class="relative w-full h-48">
+          <img
+            src="images/shootboulder-thumb.png"
+            alt=""
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+          />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center
+                   transition-transform group-hover:scale-105">
+            <span class="text-white font-semibold">규칙 공개 전입니다.</span>
           </div>
-        </a>
-        <a href="rules/balance-rules.html" onclick="event.preventDefault()" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
-          <img src="images/balance-thumb.jpg" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">팀별 밸런스 챌린지</h3>
-            <p class="text-gray-600">균형 감각을 겨루는 밸런스 챌린지로 즐거운 경쟁을 유도합니다.</p>
+        </div>
+        <!-- 텍스트 -->
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">팀별 찍볼 대전</h3>
+          <p class="text-gray-600">
+            다양한 난이도의 찍볼 문제를 팀별로 해결하며 팀워크를 높입니다.
+          </p>
+        </div>
+      </a>
+
+      <!-- 카드 2 -->
+      <a
+        href="rules/balance-rules.html"
+        onclick="event.preventDefault()"
+        class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
+      >
+        <div class="relative w-full h-48">
+          <img
+            src="images/balance-thumb.jpg"
+            alt=""
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+          />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center
+                   transition-transform group-hover:scale-105">
+            <span class="text-white font-semibold">규칙 공개 전입니다.</span>
           </div>
-        </a>
-        <a href="rules/minigame-rules.html" onclick="event.preventDefault()" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
-          <img src="images/minigame-thumb.jpg" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">미니게임</h3>
-            <p class="text-gray-600">가볍게 즐길 수 있는 다양한 미니게임으로 재미를 더합니다.</p>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">팀별 밸런스 챌린지</h3>
+          <p class="text-gray-600">
+            균형 감각을 겨루는 밸런스 챌린지로 즐거운 경쟁을 유도합니다.
+          </p>
+        </div>
+      </a>
+
+      <!-- 카드 3 -->
+      <a
+        href="rules/minigame-rules.html"
+        onclick="event.preventDefault()"
+        class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
+      >
+        <div class="relative w-full h-48">
+          <img
+            src="images/minigame-thumb.jpg"
+            alt=""
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+          />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center
+                   transition-transform group-hover:scale-105">
+            <span class="text-white font-semibold">규칙 공개 전입니다.</span>
           </div>
-        </a>
-        <a href="utils/random-picking.html" class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition">
-          <img src="images/gatcha-thumb.jpg" alt="" class="w-full h-48 object-cover group-hover:scale-105 transition-transform"/>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2">경품 추첨</h3>
-            <p class="text-gray-600">후원사가 제공한 선물을 랜덤 추첨으로 증정합니다.</p>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">미니게임</h3>
+          <p class="text-gray-600">
+            가볍게 즐길 수 있는 다양한 미니게임으로 재미를 더합니다.
+          </p>
+        </div>
+      </a>
+
+      <!-- 카드 4 -->
+      <a
+        href="rules/randomgatcha-rules.html"
+        onclick="event.preventDefault()"
+        class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
+      >
+        <div class="relative w-full h-48">
+          <img
+            src="images/gatcha-thumb.jpg"
+            alt=""
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+          />
+          <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center
+                   transition-transform group-hover:scale-105">
+            <span class="text-white font-semibold">규칙 공개 전입니다.</span>
           </div>
-        </a>
-      </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2">경품 추첨</h3>
+          <p class="text-gray-600">
+            후원사가 제공한 선물을 랜덤 추첨으로 증정합니다.
+          </p>
+        </div>
+      </a>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Location Section (카카오맵 퍼가기, 확실히 가운데 정렬) -->
   <section id="location"
