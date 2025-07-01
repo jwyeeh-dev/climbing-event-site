@@ -150,54 +150,54 @@
       <div class="bg-white rounded-3xl shadow-md p-6">
         <h3 class="text-xl font-semibold mb-3">1조</h3>
         <ul class="space-y-1">
-          <li>신용하</li>
-          <li>소현빈</li>
-          <li>김다은</li>
+          <li>신OO</li>
+          <li>소OO</li>
+          <li>김OO</li>
         </ul>
       </div>
       <!-- 2조 -->
       <div class="bg-white rounded-3xl shadow-md p-6">
         <h3 class="text-xl font-semibold mb-3">2조</h3>
         <ul class="space-y-1">
-          <li>이소진</li>
-          <li>김지원</li>
-          <li>유승원</li>
+          <li>이OO</li>
+          <li>김OO</li>
+          <li>유OO</li>
         </ul>
       </div>
       <!-- 3조 -->
       <div class="bg-white rounded-3xl shadow-md p-6">
         <h3 class="text-xl font-semibold mb-3">3조</h3>
         <ul class="space-y-1">
-          <li>이정민</li>
-          <li>황재영</li>
-          <li>조창희</li>
+          <li>이OO</li>
+          <li>황OO</li>
+          <li>조OO</li>
         </ul>
       </div>
       <!-- 4조 -->
       <div class="bg-white rounded-3xl shadow-md p-6">
         <h3 class="text-xl font-semibold mb-3">4조</h3>
         <ul class="space-y-1">
-          <li>서지아</li>
-          <li>박혜민</li>
-          <li>이소영</li>
+          <li>서OO</li>
+          <li>박OO</li>
+          <li>이OO</li>
         </ul>
       </div>
       <!-- 5조 -->
       <div class="bg-white rounded-3xl shadow-md p-6">
         <h3 class="text-xl font-semibold mb-3">5조</h3>
         <ul class="space-y-1">
-          <li>오영신</li>
-          <li>김채록</li>
-          <li>이예슬</li>
+          <li>오OO</li>
+          <li>김OO</li>
+          <li>이OO</li>
         </ul>
       </div>
       <!-- 6조 -->
       <div class="bg-white rounded-3xl shadow-md p-6">
         <h3 class="text-xl font-semibold mb-3">6조</h3>
         <ul class="space-y-1">
-          <li>김상우</li>
-          <li>한유나</li>
-          <li>김보현</li>
+          <li>김OO</li>
+          <li>한OO</li>
+          <li>김OO</li>
         </ul>
       </div>
     </div>
@@ -340,7 +340,7 @@
   <!-- Back to Top Button -->
   <button
     id="backToTop"
-    class="hidden fixed bottom-6 right-6 transform -translate-x-1/2 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity"
+    class="hidden fixed bottom-6 right-3 transform -translate-x-1/2 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity"
     aria-label="맨 위로 이동"
   >
     ↑ Top
@@ -359,8 +359,18 @@
   </script>
 
   <script>
-  // 2) 새로고침 직전(beforeunload)에 스크롤 위치를 최상단으로 이동
-  window.addEventListener('beforeunload', () => {
+  // 1) History API의 자동 스크롤 복원 기능 비활성화
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // 2) 새로고침 직전(beforeunload)에도 스크롤 위치를 최상단으로
+  window.addEventListener('beforeunload', function () {
+    window.scrollTo(0, 0);
+  });
+
+  // 3) 페이지 로드 완료(load) 시 강제로 최상단으로
+  window.addEventListener('load', function () {
     window.scrollTo(0, 0);
   });
 </script>
