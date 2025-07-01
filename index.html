@@ -240,34 +240,37 @@
     </div>
   </section>
 
-  <!-- Location Section (Kakao Map 퍼가기, 가운데·아래 margin 적용) -->
-  <section id="location"
-          class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
-    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
-      📍 오시는 길
-    </h2>
+  <!-- Location Section (카카오맵 퍼가기, 확실히 가운데 정렬) -->
+<section id="location"
+         class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
+  <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+    📍 오시는 길
+  </h2>
 
-    <!-- 1) 지도 퍼가기용 컨테이너: mx-auto (가로중앙), mb-8 (아래 32px) -->
-    <div id="daumRoughmapContainer1751335841505"
-        class="root_daum_roughmap root_daum_roughmap_landing mx-auto mb-8"
-        style="width:500px; height:400px;">
-    </div>
+  <!-- 1) 부모를 flex 컨테이너로: justify-center & mb-8 -->
+  <div class="flex justify-center mb-8">
+    <!-- 2) 실제 지도 컨테이너 -->
+    <div
+      id="daumRoughmapContainer1751335841505"
+      class="root_daum_roughmap root_daum_roughmap_landing"
+      style="width:500px; height:400px;"
+    ></div>
+  </div>
 
-    <!-- 2) 퍼가기 설치 스크립트 (한 번만) -->
-    <script charset="UTF-8"
-            class="daum_roughmap_loader_script"
-            src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js">
-    </script>
+  <!-- 퍼가기 스크립트는 한 번만 -->
+  <script charset="UTF-8"
+          class="daum_roughmap_loader_script"
+          src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js">
+  </script>
+  <script charset="UTF-8">
+    new daum.roughmap.Lander({
+      "timestamp" : "1751335841505",
+      "key"       : "4h76ktqvcww",
+      "mapWidth"  : "800",
+      "mapHeight" : "600"
+    }).render();
+  </script>
 
-    <!-- 3) 지도 렌더링 스크립트 -->
-    <script charset="UTF-8">
-      new daum.roughmap.Lander({
-        "timestamp" : "1751335841505",
-        "key"       : "4h76ktqvcww",
-        "mapWidth"  : "800",
-        "mapHeight" : "600"
-      }).render();
-    </script>
     <!-- 버튼 그룹 -->
     <div class="flex justify-center gap-6 mb-8">
       <!-- Naver Map 버튼 -->
