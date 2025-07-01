@@ -259,35 +259,35 @@
   </section>
 
   <!-- Location Section (카카오맵 퍼가기, 확실히 가운데 정렬) -->
-<section id="location"
-         class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
-  <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
-    📍 오시는 길
-  </h2>
+  <section id="location"
+          class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+      📍 오시는 길
+    </h2>
 
-  <!-- 1) 부모를 flex 컨테이너로: justify-center & mb-8 -->
-  <div class="flex justify-center mb-8">
-    <!-- 2) 실제 지도 컨테이너 -->
-    <div
-      id="daumRoughmapContainer1751335841505"
-      class="root_daum_roughmap root_daum_roughmap_landing"
-      style="width:500px; height:400px;"
-    ></div>
-  </div>
+    <!-- 1) 부모를 flex 컨테이너로: justify-center & mb-8 -->
+    <div class="flex justify-center mb-8">
+      <!-- 2) 실제 지도 컨테이너 -->
+      <div
+        id="daumRoughmapContainer1751335841505"
+        class="root_daum_roughmap root_daum_roughmap_landing"
+        style="width:500px; height:400px;"
+      ></div>
+    </div>
 
-  <!-- 퍼가기 스크립트는 한 번만 -->
-  <script charset="UTF-8"
-          class="daum_roughmap_loader_script"
-          src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js">
-  </script>
-  <script charset="UTF-8">
-    new daum.roughmap.Lander({
-      "timestamp" : "1751335841505",
-      "key"       : "4h76ktqvcww",
-      "mapWidth"  : "800",
-      "mapHeight" : "600"
-    }).render();
-  </script>
+    <!-- 퍼가기 스크립트는 한 번만 -->
+    <script charset="UTF-8"
+            class="daum_roughmap_loader_script"
+            src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js">
+    </script>
+    <script charset="UTF-8">
+      new daum.roughmap.Lander({
+        "timestamp" : "1751335841505",
+        "key"       : "4h76ktqvcww",
+        "mapWidth"  : "800",
+        "mapHeight" : "600"
+      }).render();
+    </script>
 
     <!-- 버튼 그룹 -->
     <div class="flex justify-center gap-6 mb-8">
@@ -358,7 +358,7 @@
   <!-- Back to Top Button -->
   <button
     id="backToTop"
-    class="hidden fixed bottom-6 right-3 transform -translate-x-1/2 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity"
+    class="hidden fixed bottom-6 right-3 transform -translate-x-1/2 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity z-50"
     aria-label="맨 위로 이동"
   >
     ↑ Top
