@@ -23,6 +23,13 @@
   <meta name="twitter:description" content="7/19(토) 18:00 @치즈클라이밍(용산) — 팀전 찍볼, 밸런스 챌린지, 미니게임, 경품 추첨" />
   <meta name="twitter:image"       content="https://<계정>.github.io/climbing-event/images/banner.png" />
 
+
+  <!-- AOS Animate On Scroll CSS -->
+  <link
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    rel="stylesheet"
+  />
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Alpine.js for interactivity -->
@@ -86,7 +93,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="hero" class="relative h-screen overflow-hidden">
+  <section id="hero" class="relative h-screen overflow-hidden" data-aos="fade-up">
     <img src="images/banner.png"
          alt="클라이팅 X 크루아닌크루 배너"
          class="absolute inset-0 w-full h-full object-cover"/>
@@ -106,7 +113,7 @@
   </section>
 
   <!-- Overview Section -->
-  <section id="overview" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-white">
+  <section id="overview" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-white" data-aos="fade-up">
     <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">행사 개요</h2>
     <div class="grid md:grid-cols-2 gap-12">
       <div class="space-y-6">
@@ -136,7 +143,7 @@
   </section>
 
   <!-- Schedule Section -->
-  <section id="schedule" class="scroll-mt-16 bg-slate-100 py-20">
+  <section id="schedule" class="scroll-mt-16 bg-slate-100 py-20" data-aos="fade-up">
     <div class="max-w-6xl mx-auto px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">타임테이블</h2>
       <div class="overflow-x-auto">
@@ -161,7 +168,7 @@
   </section>
 
   <!-- Teams Section -->
-  <section id="teams" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-white">
+  <section id="teams" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-white" data-aos="fade-up">
     <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">조 편성</h2>
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       <!-- 1조 -->
@@ -222,7 +229,7 @@
   </section>
 
   <!-- Programs Section -->
-  <section id="programs" class="scroll-mt-16 bg-slate-100 py-20">
+  <section id="programs" class="scroll-mt-16 bg-slate-100 py-20" data-aos="fade-up">
     <div class="max-w-6xl mx-auto px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">프로그램 설명 및 규칙</h2>
       <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-2">
@@ -260,7 +267,7 @@
 
   <!-- Location Section (카카오맵 퍼가기, 확실히 가운데 정렬) -->
   <section id="location"
-          class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50">
+          class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20 bg-slate-50" data-aos="fade-up">
     <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
       📍 오시는 길
     </h2>
@@ -329,7 +336,7 @@
   </section>
 
   <!-- Sponsors Section -->
-  <section id="sponsors" class="scroll-mt-16 py-20 bg-white">
+  <section id="sponsors" class="scroll-mt-16 py-20 bg-white" data-aos="fade-up">
     <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-gray-900 mb-12">🤝 협찬</h2>
       <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-8 justify-items-center items-center">
@@ -363,6 +370,15 @@
   >
     ↑ Top
   </button>
+
+  <!-- AOS Animate On Scroll JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      duration: 800
+    });
+  </script>
 
   <script>
     // Back to Top 스크립트
