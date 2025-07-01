@@ -5,6 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>클라이팅 X 크루아닌크루 교류전</title>
+
+  <!-- SEO 메타 설명 -->
+  <meta name="description"
+        content="크루아닌크루와 클라이팅이 함께하는 클라이밍 교류전 — 2025년 7월 19일(토) 18:00 @치즈클라이밍(용산)에서 팀전 찍볼, 밸런스 챌린지, 미니게임, 경품 추첨을 즐겨보세요!" />
+
+  <!-- Open Graph 태그 (페이스북, 카카오톡 등 공유 시) -->
+  <meta property="og:title"       content="크루아닌크루 X 클라이팅 클라이밍 교류전" />
+  <meta property="og:description" content="7/19(토) 18:00 @치즈클라이밍(용산) — 팀전 찍볼, 밸런스 챌린지, 미니게임, 경품 추첨" />
+  <meta property="og:image"       content="https://<계정>.github.io/climbing-event/images/banner.png" />
+  <meta property="og:url"         content="https://<계정>.github.io/climbing-event/" />
+  <meta property="og:type"        content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="크루아닌크루 X 클라이팅 클라이밍 교류전" />
+  <meta name="twitter:description" content="7/19(토) 18:00 @치즈클라이밍(용산) — 팀전 찍볼, 밸런스 챌린지, 미니게임, 경품 추첨" />
+  <meta name="twitter:image"       content="https://<계정>.github.io/climbing-event/images/banner.png" />
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Alpine.js for interactivity -->
@@ -361,17 +379,20 @@
   <script>
   // 1) History API의 자동 스크롤 복원 기능 비활성화
   if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
+    history.scrollRestoration = 'auto';
   }
 
-  // 2) 새로고침 직전(beforeunload)에도 스크롤 위치를 최상단으로
-  window.addEventListener('beforeunload', function () {
-    window.scrollTo(0, 0);
-  });
+  // // 2) 새로고침 직전(beforeunload)에도 스크롤 위치를 최상단으로
+  // window.addEventListener('beforeunload', function () {
+  //   window.scrollTo(0, 0);
+  // });
 
-  // 3) 페이지 로드 완료(load) 시 강제로 최상단으로
-  window.addEventListener('load', function () {
-    window.scrollTo(0, 0);
+  // 3) 페이지 로드 완료 후 부드러운 스크롤 애니메이션으로 최상단 이동
+  window.addEventListener('load', () => {
+    // 약간의 지연을 주면 렌더링이 끝난 뒤 애니메이션이 잘 보입니다
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   });
 </script>
 </body>
