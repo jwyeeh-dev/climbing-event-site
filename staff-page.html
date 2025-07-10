@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>점수 입력 (스태프용)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <div x-data="scoreManager()" class="max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+    <h1 class="text-3xl font-bold text-center mb-2">점수 입력</h1>
+    <p class="text-center text-gray-500 mb-8">팀별 점수를 입력하고 저장 버튼을 누르세요.</p>
+
+    <div class="space-y-4">
+      <template x-for="(team, index) in scores" :key="index">
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+          <label :for="'team-' + index" class="text-lg font-semibold" x-text="team.team + '조'"></label>
+          <input
+            :id="'team-' + index"
+            type="number"
+            x-model.number="team.score"
+            class="w-32 text-right px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            placeholder="점수"
+          >
+        </div>
+      </template>
+    </div>
+
+    <div class="mt-8">
+      <button @click="saveScores()" class="w-full bg-orange-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-700 transition">
+        저장하기
+      </button>
+      <p x-show="saved" x-transition class="text-center text-green-600 mt-4">성공적으로 저장되었습니다!</p>
+    </div>
+
+    <div class="text-center mt-6">
+        <a href="leaderboard.html" class="text-orange-600 hover:underline">리더보드 보기</a>
+    </div>
+  </div>
+
+  <script>
+    function scoreManager() {
+      return {
+        saved: false,
+        scores: [],
+        init() {
+          const existingScores = localStorage.getItem('climbingLeaderboard');
+          if (existingScores) {
+            this.scores = JSON.parse(existingScores);
+          } else {
+            // 조는 1조부터 6조까지 있다고 가정합니다.
+            this.scores = Array.from({ length: 6 }, (_, i) => ({ team: i + 1, score: 0 }));
+          }
+        },
+        saveScores() {
+          localStorage.setItem('climbingLeaderboard', JSON.stringify(this.scores));
+          this.saved = true;
+          setTimeout(() => { this.saved = false; }, 2000);
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

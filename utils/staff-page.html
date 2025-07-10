@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>교류전 팀별 점수 입력</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-slate-100 min-h-screen py-10">
+
+  <h1 class="text-3xl font-bold text-center mb-8">🤸 교류전 점수 입력</h1>
+
+  <div x-data="scoreApp()" class="max-w-5xl mx-auto space-y-10">
+
+    <!-- 6개 조 반복 -->
+    <template x-for="team in teams" :key="team.id">
+      <section class="bg-white rounded-2xl shadow p-6">
+
+        <!-- 조 헤더 -->
+        <header class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold" x-text="team.name + '조'"></h2>
+          <span class="text-lg font-bold text-blue-600" x-text="team.total + '점'"></span>
+        </header>
+
+        <!-- 조원 입력 테이블 -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-center text-sm">
+            <thead class="bg-slate-200">
+              <tr>
+                <th class="py-2 px-2">조원</th>
+                <template x-for="i in 3">
+                  <th class="py-2 px-2" x-text="'문제 ' + i"></th>
+                </template>
+                <th class="py-2 px-2">합계</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="member in team.members" :key="member.id">
+                <tr class="even:bg-slate-50">
+                  <!-- 이름 -->
+                  <td class="py-2 px-2 font-medium" x-text="member.name"></td>
+
+                  <!-- 시도 결과 입력 -->
+                  <template x-for="prob in member.problems">
+                    <td class="py-2 px-2">
+                      <select
+                        x-model.number="prob.try"
+                        @change="$dispatch('recalc')"
+                        class="border rounded px-1 py-0.5 text-sm">
+                        <option :value="0">실패</option>
+                        <option :value="1">1트</option>
+                        <option :value="2">2트</option>
+                        <option :value="3">3트</option>
+                      </select>
+                    </td>
+                  </template>
+
+                  <!-- 개인 합계 -->
+                  <td class="py-2 px-2 font-semibold" x-text="member.total"></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </template>
+
+    <!-- 전체 재계산 버튼 -->
+    <div class="text-center">
+      <button
+        class="bg-orange-600 hover:bg-orange-700 text-white font-semibold px-6 py-2 rounded-lg shadow"
+        @click="recalculateAll">
+        전체 합계 다시 계산
+      </button>
+    </div>
+  </div>
+
+  <!-- Alpine 컴포넌트 -->
+  <script>
+    function scoreApp () {
+      // 점수 매핑: 시도->점
+      const scoreMap = {1: 3, 2: 2, 3: 1, 0: 0};
+
+      return {
+        // 6개 조 & 3명·3문제 초기값
+        teams: Array.from({ length: 6 }, (_, t) => ({
+          id: t + 1,
+          name: t + 1,
+          total: 0,
+          members: ['A', 'B', 'C'].map((m, idx) => ({
+            id: `${t}-${idx}`,
+            name: `${m}조원`,
+            total: 0,
+            problems: Array.from({ length: 3 }, () => ({ try: 0 }))
+          }))
+        })),
+
+        // 개별·전체 점수 재계산
+        recalculateAll () {
+          this.teams.forEach(team => {
+            let teamSum = 0;
+            team.members.forEach(mem => {
+              mem.total = mem.problems.reduce((s, p) => s + scoreMap[p.try], 0);
+              teamSum += mem.total;
+            });
+            team.total = teamSum;
+          });
+        },
+
+        // Alpine init
+        init () {
+          this.$watch('teams', () => this.recalculateAll(), { deep: true });
+          this.recalculateAll();
+          // ‘recalc’ 커스텀 이벤트 처리 (select 변경 시)
+          this.$el.addEventListener('recalc', () => this.recalculateAll());
+        }
+      };
+    }
+  </script>
+</body>
+</html>
