@@ -170,7 +170,7 @@
 
   <!-- Teams Section -->
   <section id="teams" class="bg-slate-50">
-    <div x-data="teamSearch()" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20" data-aos="fade-up">
+    <div x-data="teamSearch()" x-init="init()" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">조 편성</h2>
       <p class="text-center text-gray-600 mb-12">이름을 검색하여 소속 조를 확인하세요.</p>
 
@@ -193,7 +193,7 @@
       <!-- Search Result -->
       <template x-if="searchResult">
         <div class="max-w-md mx-auto mb-12 p-6 bg-white rounded-3xl shadow-lg text-center">
-          <h3 class="text-2xl font-bold mb-2" x-text="`${searchResult.team}조 입니다!`"></h3>
+          <h3 class="text-2xl font-bold mb-2" x-text="`${searchResult.team} `"></h3>
           <ul class="space-y-2 text-lg">
             <template x-for="member in searchResult.members">
               <li x-text="member" :class="{'font-bold text-orange-600': member.includes(searchQuery.trim())}"></li>
@@ -413,7 +413,7 @@
         </div>
         <!-- Sponsor 3 -->
         <div class="flex justify-center items-center h-20">
-          <img src="images/orle_logo.png" alt="ORLE" class="max-h-full max-w-full object-contain"/>
+          <img src="images/orle-logo.png" alt="ORLE" class="max-h-full max-w-full object-contain"/>
         </div>
         <!-- Sponsor 5 -->
         <div class="flex justify-center items-center h-20">
@@ -474,26 +474,35 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
-  <script src="teams.js"></script> 
+
+  <script src="teams.js"></script>
   <script>
-      function teamSearch() {
-        return {
-          searchQuery: '',
-          searchResult: null,
-          teams: JSON.parse(atob(encodedTeams)),
-          search() {
-            if (!this.searchQuery.trim()) {
-              this.searchResult = null;
-              return;
-            }
-            this.searchResult = this.teams.find(team =>
-              team.members.some(member =>
-                member.toLowerCase().includes(this.searchQuery.toLowerCase().trim())
-              )
-            );
+    function teamSearch() {
+      return {
+        searchQuery: '',
+        searchResult: null,
+        teams: [],
+        init() {
+          this.teams = teamsData.map(team => {
+            return {
+              ...team,
+              members: team.members.map(name => decodeURIComponent(escape(atob(name))))
+            };
+          });
+        },
+        search() {
+          if (!this.searchQuery.trim()) {
+            this.searchResult = null;
+            return;
           }
-        };
-      }
-    </script>
+          this.searchResult = this.teams.find(team =>
+            team.members.some(member =>
+              member.toLowerCase().includes(this.searchQuery.toLowerCase().trim())
+            )
+          );
+        }
+      };
+    }
+  </script>
 </body>
 </html>
