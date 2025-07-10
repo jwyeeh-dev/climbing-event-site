@@ -169,63 +169,43 @@
   </section>
 
   <!-- Teams Section -->
-  <section id="teams"  class="bg-slate-50">
-    <div class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20" data-aos="fade-up">
-    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">조 편성</h2>
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- 1조 -->
-      <div class="bg-white rounded-3xl shadow-md p-6">
-        <h3 class="text-xl font-semibold mb-3">1조</h3>
-        <ul class="space-y-1">
-          <li>신OO</li>
-          <li>소OO</li>
-          <li>김OO</li>
-        </ul>
+  <section id="teams" class="bg-slate-50">
+    <div x-data="teamSearch()" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">조 편성</h2>
+      <p class="text-center text-gray-600 mb-12">이름을 검색하여 소속 조를 확인하세요.</p>
+
+      <!-- Search Input -->
+      <div class="max-w-md mx-auto mb-12">
+        <div class="relative">
+          <input
+            type="text"
+            x-model="searchQuery"
+            @input.debounce.300ms="search()"
+            placeholder="이름을 입력하세요..."
+            class="w-full px-4 py-3 pr-10 text-gray-700 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+          <svg class="absolute top-1/2 right-4 transform -translate-y-1/2 w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+          </svg>
+        </div>
       </div>
-      <!-- 2조 -->
-      <div class="bg-white rounded-3xl shadow-md p-6">
-        <h3 class="text-xl font-semibold mb-3">2조</h3>
-        <ul class="space-y-1">
-          <li>이OO</li>
-          <li>김OO</li>
-          <li>유OO</li>
-        </ul>
-      </div>
-      <!-- 3조 -->
-      <div class="bg-white rounded-3xl shadow-md p-6">
-        <h3 class="text-xl font-semibold mb-3">3조</h3>
-        <ul class="space-y-1">
-          <li>이OO</li>
-          <li>황OO</li>
-          <li>조OO</li>
-        </ul>
-      </div>
-      <!-- 4조 -->
-      <div class="bg-white rounded-3xl shadow-md p-6">
-        <h3 class="text-xl font-semibold mb-3">4조</h3>
-        <ul class="space-y-1">
-          <li>서OO</li>
-          <li>박OO</li>
-          <li>이OO</li>
-        </ul>
-      </div>
-      <!-- 5조 -->
-      <div class="bg-white rounded-3xl shadow-md p-6">
-        <h3 class="text-xl font-semibold mb-3">5조</h3>
-        <ul class="space-y-1">
-          <li>오OO</li>
-          <li>김OO</li>
-          <li>이OO</li>
-        </ul>
-      </div>
-      <!-- 6조 -->
-      <div class="bg-white rounded-3xl shadow-md p-6">
-        <h3 class="text-xl font-semibold mb-3">6조</h3>
-        <ul class="space-y-1">
-          <li>김OO</li>
-          <li>한OO</li>
-          <li>김OO</li>
-        </ul>
+
+      <!-- Search Result -->
+      <template x-if="searchResult">
+        <div class="max-w-md mx-auto mb-12 p-6 bg-white rounded-3xl shadow-lg text-center">
+          <h3 class="text-2xl font-bold mb-2" x-text="`${searchResult.team}조 입니다!`"></h3>
+          <ul class="space-y-2 text-lg">
+            <template x-for="member in searchResult.members">
+              <li x-text="member" :class="{'font-bold text-orange-600': member.includes(searchQuery.trim())}"></li>
+            </template>
+          </ul>
+        </div>
+      </template>
+      <template x-if="searchQuery && !searchResult">
+        <div class="text-center text-gray-500">
+          <p>검색 결과가 없습니다.</p>
+        </div>
+      </template>
       </div>
     </div>
   </section>
@@ -494,25 +474,26 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
-
+  <script src="teams.js"></script> 
   <script>
-  // 1) History API의 자동 스크롤 복원 기능 비활성화
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'auto';
-  }
-
-  // // 2) 새로고침 직전(beforeunload)에도 스크롤 위치를 최상단으로
-  // window.addEventListener('beforeunload', function () {
-  //   window.scrollTo(0, 0);
-  // });
-
-  // 3) 페이지 로드 완료 후 부드러운 스크롤 애니메이션으로 최상단 이동
-  window.addEventListener('load', () => {
-    // 약간의 지연을 주면 렌더링이 끝난 뒤 애니메이션이 잘 보입니다
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
-  });
-</script>
+      function teamSearch() {
+        return {
+          searchQuery: '',
+          searchResult: null,
+          teams: JSON.parse(atob(encodedTeams)),
+          search() {
+            if (!this.searchQuery.trim()) {
+              this.searchResult = null;
+              return;
+            }
+            this.searchResult = this.teams.find(team =>
+              team.members.some(member =>
+                member.toLowerCase().includes(this.searchQuery.toLowerCase().trim())
+              )
+            );
+          }
+        };
+      }
+    </script>
 </body>
 </html>
