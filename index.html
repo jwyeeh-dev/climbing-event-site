@@ -49,6 +49,12 @@
     .animate-marquee {
       animation: marquee 25s linear infinite;
     }
+    .sponsor-logo {
+      transition: transform 0.3s ease-in-out;
+    }
+    .sponsor-logo:hover {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-gray-800">
@@ -226,7 +232,6 @@
       <!-- 카드 1 -->
       <a
         href="rules/rules-fake.html"
-        onclick="event.preventDefault()"
         class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
       >
         <!-- 이미지 + 오버레이 -->
@@ -253,7 +258,6 @@
       <!-- 카드 2 -->
       <a
         href="rules/rules-fake.html"
-        onclick="event.preventDefault()"
         class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
       >
         <div class="relative w-full h-48">
@@ -278,7 +282,6 @@
       <!-- 카드 3 -->
       <a
         href="rules/rules-fake.html"
-        onclick="event.preventDefault()"
         class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
       >
         <div class="relative w-full h-48">
@@ -302,8 +305,7 @@
 
       <!-- 카드 4 -->
       <a
-        href="rules/randomgatcha-rules.html"
-        onclick="event.preventDefault()"
+        href="rules/rules-fake.html"
         class="relative group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition"
       >
         <div class="relative w-full h-48">
@@ -401,35 +403,64 @@
 
   <!-- Sponsors Section -->
   <section id="sponsors" class="scroll-mt-16 py-20 bg-white" data-aos="fade-up">
-    <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+    <div
+      x-data="sponsorModal()"
+      @keydown.escape.window="closeModal()"
+      class="max-w-6xl mx-auto px-6 lg:px-8 text-center"
+    >
       <h2 class="text-3xl font-bold text-gray-900 mb-12">협찬사</h2>
+
+      <!-- Logo Grid -->
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 items-center">
-        <!-- Sponsor 1 -->
-        <div class="flex justify-center items-center h-20">
-          <img src="images/goodchalk-logo.png" alt="GoodChalk" class="max-h-full max-w-full object-contain"/>
-        </div>
-        <!-- Sponsor 2 -->
-        <div class="flex justify-center items-center h-20">
-          <img src="images/boogipark-equip-logo.png" alt="BoogiPark" class="max-h-full max-w-full object-contain"/>
-        </div>
-        <!-- Sponsor 3 -->
-        <div class="flex justify-center items-center h-20">
-          <img src="images/orle-logo.png" alt="ORLE" class="max-h-full max-w-full object-contain"/>
-        </div>
-        <!-- Sponsor 5 -->
-        <div class="flex justify-center items-center h-20">
-          <img src="images/toeandsole-logo-removebg.png" alt="ToeandSole" class="max-h-full max-w-full object-contain"/>
-        </div>
-        <!-- Sponsor 5 -->
-        <div class="flex justify-center items-center h-20">
-          <img src="images/crafthowl-logo.png" alt="CraftHowl" class="max-h-full max-w-full object-contain"/>
-        </div>
-        <!-- Sponsor 4 -->
-        <div class="flex justify-center items-center h-20">
-          <img src="images/boulderland-logo.png" alt="boulderland-logo" class="max-h-full max-w-full object-contain"/>
+        <template x-for="sponsor in sponsors" :key="sponsor.id">
+          <div @click="openModal(sponsor)" class="flex justify-center items-center h-20 cursor-pointer">
+            <img :src="sponsor.logo" :alt="sponsor.name" class="max-h-full max-w-full object-contain sponsor-logo"/>
+          </div>
+        </template>
+      </div>
+
+      <!-- Modal -->
+      <div
+        x-show="isOpen"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
+        style="display: none;"
+      >
+        <!-- Modal Content -->
+        <div
+          @click.away="closeModal()"
+          x-show="isOpen"
+          x-transition:enter="transition ease-out duration-300"
+          x-transition:enter-start="opacity-0 scale-90"
+          x-transition:enter-end="opacity-100 scale-100"
+          x-transition:leave="transition ease-in duration-200"
+          x-transition:leave-start="opacity-100 scale-100"
+          x-transition:leave-end="opacity-0 scale-90"
+          class="relative bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4"
+        >
+          <!-- Close Button -->
+          <button @click="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+
+          <div class="p-8 text-left">
+            <img :src="currentSponsor.prizeImage" :alt="currentSponsor.name + ' 협찬품'" class="w-64 h-64 object-contain mx-auto rounded-lg mb-6 bg-gray-100">
+            <h3 class="text-2xl font-bold mb-3" x-text="currentSponsor.name"></h3>
+            <p class="text-gray-700 mb-6" x-text="currentSponsor.description"></p>
+            <a :href="currentSponsor.link" target="_blank" rel="noopener noreferrer"
+               class="inline-block w-full text-center px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg shadow hover:bg-orange-700 transition">
+              웹사이트 방문하기
+            </a>
+          </div>
         </div>
       </div>
     </div>
+    
   </section>
 
   <!-- Footer -->
@@ -478,6 +509,71 @@
 
   <script src="teams.js"></script>
   <script>
+    function sponsorModal() {
+      return {
+        isOpen: false,
+        currentSponsor: {},
+        sponsors: [
+          {
+            id: 1,
+            name: 'GoodChalk (굿초크)',
+            description: '최상의 그립감을 제공하는 클라이밍 초크 전문 브랜드 굿초크입니다. 굿초크와 함께 완등의 기쁨을 느껴보세요! 초크는 역시 굿초크!',
+            logo: 'images/goodchalk-logo.png',
+            link: 'https://www.instagram.com/good_chalk/',
+            prizeImage: 'images/goodchalk_gatcha.png'
+          },
+          {
+            id: 2,
+            name: "BOOGIPARK's Equipment (부기팍)",
+            logo: 'images/boogipark-equip-logo.png',
+            description: '우리들의 등반을 위하여, 부기팍 이큅먼트입니다. 저 부기팍이 직접 신기 위해 만든 브랜드입니다. 발이 약한 클라이머를 위한 전용 양말뿐만 아니라 다양한 장비들을 부기팍과 함께 하세요.',
+            link: 'https://smartstore.naver.com/boogipark/',
+            prizeImage: 'images/boogipark-sock-marketing.jpg'
+          },
+          {
+            id: 3,
+            name: 'ORLE (오를레)',
+            logo: 'images/orle-logo.png',
+            description: 
+            "함께 오르는 즐거움, 오를레(orle)입니다. 오를레는 클라이밍 전문 의류 브랜드로서 새로운 도전을 지지하고 성취의 순간을 함께하는 단짝 친구 🙌 입니다. ORLE 와 함께 도전을 표현해보세요!",
+            link: 'https://www.instagram.com/orle_climbing/',
+            prizeImage: 'images/orle-pants-marketing.jpeg' 
+          },
+          {
+            id: 4,
+            name: 'Toe & Sole (토앤솔)',
+            logo: 'images/toeandsole-logo-removebg.png',
+            description: '발을 지키는 작은 습관, 삶을 바꾸는 큰 변화, 토앤솔입니다. 클라이머의 발, 이제 제대로 관리할 때! 현직 피부과 전문의가 개발한 향긋한 레몬 그라스향 풋케어 스프레이를 만나보세요.',
+            link: 'https://www.instagram.com/sanidoc.official/',
+            prizeImage: 'images/toeandsole-spray-marketing.jpg'
+          },
+          {
+            id: 5,
+            name: 'CraftHowl (공방하울)',
+            logo: 'images/crafthowl-logo.png',
+            description: '클라이밍에 미친 공방, 공방하울입니다. 암장에서 사용하는 홀드와 같은 재료, 공정으로 제작되는 아이템과 곧 출시되는 초크 소식이 궁금하시다면 공방하울을 방문해주세요.',
+            link: 'https://www.crafthowl.com/',
+            prizeImage: 'images/crafthowl-logo.png'
+          },
+          {
+            id: 6,
+            name: 'BoulderLand',
+            logo: 'images/boulderland-logo.png',
+            description: "실내클라이밍, '볼더링'만을 위한 클라이밍 용품점, 볼더랜드입니다. 클라이머가 행복한 공간, 클라이밍 용품이 필요하실 땐 볼더랜드를 들려주세요. 'WELCOME TO BOULDERLAND'.",
+            link: 'https://boulderland.kr/',
+            prizeImage: 'images/boulderland-marketing.jpg'
+          }
+        ],
+        openModal(sponsor) {
+          this.currentSponsor = sponsor;
+          this.isOpen = true;
+        },
+        closeModal() {
+          this.isOpen = false;
+        }
+      };
+    }
+
     function teamSearch() {
       return {
         searchQuery: '',
