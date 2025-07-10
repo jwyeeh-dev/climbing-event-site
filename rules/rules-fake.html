@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>규칙 안내</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a1a1a;
+            font-family: 'Pretendard', sans-serif;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        .container {
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤫</h1>
+        <p>규칙은 이벤트 당일 공개됩니다!</p>
+    </div>
+
+    <script>
+        const emojiStyle = [
+            'font-size: 100px',
+            'text-shadow: 3px 3px 5px rgba(0,0,0,0.5)'
+        ].join(';');
+
+        const textStyle = [
+            'font-size: 18px',
+            'color: #ffb347',
+            'font-weight: bold',
+            'line-height: 1.6'
+        ].join(';');
+
+        console.log('%c🤫', emojiStyle);
+        console.log(
+            '%c개발자 도구로 들어오면 규칙을 볼 수 있을줄 아셨죠?\n그럴리 없으니 이벤트 날짜까지 기다려주세요!\n그 대신, 상품은 공개되어 있으니 기대도 많이 해주세요!',
+            textStyle
+        );
+    </script>
+</body>
+</html>
