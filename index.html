@@ -55,6 +55,13 @@
     .sponsor-logo:hover {
       transform: scale(1.1);
     }
+    #backToTop {
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    #backToTop.hidden {
+      opacity: 0;
+      transform: translateY(20px);   /* 아래쪽으로 살짝 숨김 */
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-gray-800">
@@ -500,7 +507,7 @@
   <!-- Back to Top Button -->
   <button
     id="backToTop"
-    class="hidden fixed bottom-6 right-3 transform -translate-x-1/2 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity z-50"
+    class="hidden fixed bottom-6 right-3 p-3 bg-orange-600 text-white rounded-full shadow-lg hover:bg-orange-700 transition-opacity z-50"
     aria-label="맨 위로 이동"
   >
     ↑ Top
