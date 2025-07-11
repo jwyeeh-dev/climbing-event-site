@@ -445,7 +445,7 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 items-center">
         <template x-for="sponsor in sponsors" :key="sponsor.id">
           <div @click="openModal(sponsor)" class="flex justify-center items-center h-20 cursor-pointer">
-            <img :src="sponsor.logo" :alt="sponsor.name" class="max-h-full max-w-full object-contain sponsor-logo"/>
+            <img :src="sponsor.logo" :alt="sponsor.name" class="max-h-auto max-w-auto object-contain sponsor-logo"/>
           </div>
         </template>
       </div>
@@ -549,6 +549,7 @@
             name: 'GoodChalk (굿초크)',
             description: '최상의 그립감을 제공하는 클라이밍 초크 전문 브랜드 굿초크입니다. 굿초크와 함께 완등의 기쁨을 느껴보세요! 초크는 역시 굿초크!',
             logo: 'images/goodchalk-logo.png',
+            
             link: 'https://linktr.ee/good_chalk',
             prizeImage: 'images/goodchalk_gatcha.png'
           },
