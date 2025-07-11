@@ -445,7 +445,7 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 items-center">
         <template x-for="sponsor in sponsors" :key="sponsor.id">
           <div @click="openModal(sponsor)" class="flex justify-center items-center h-20 cursor-pointer">
-            <img :src="sponsor.logo" :alt="sponsor.name" class="max-h-full max-w-full object-contain sponsor-logo"/>
+            <img :src="sponsor.logo" :alt="sponsor.name" :width="sponsor.w" :height="sponsor.h" class="max-h-full max-w-full object-contain sponsor-logo"/>
           </div>
         </template>
       </div>
@@ -548,7 +548,7 @@
             id: 1,
             name: 'GoodChalk (굿초크)',
             description: '최상의 그립감을 제공하는 클라이밍 초크 전문 브랜드 굿초크입니다. 굿초크와 함께 완등의 기쁨을 느껴보세요! 초크는 역시 굿초크!',
-            
+            w:240,h:70,
             logo: 'images/goodchalk-logo.png',
             link: 'https://linktr.ee/good_chalk',
             prizeImage: 'images/goodchalk_gatcha.png'
@@ -557,6 +557,7 @@
             id: 2,
             name: "BOOGIPARK's Equipment (부기팍)",
             logo: 'images/boogipark-equip-logo.png',
+            w:210,h:75,
             description: '우리들의 등반을 위하여, 부기팍 이큅먼트입니다. 저 부기팍이 직접 신기 위해 만든 브랜드입니다. 발이 약한 클라이머를 위한 전용 양말뿐만 아니라 다양한 장비들을 부기팍과 함께 하세요.',
             link: 'https://smartstore.naver.com/boogipark/',
             prizeImage: 'images/boogipark-sock-marketing.jpg'
@@ -565,6 +566,7 @@
             id: 3,
             name: 'ORLE (오를레)',
             logo: 'images/orle-logo.png',
+            w:200,h:80,
             description: 
             "함께 오르는 즐거움, 오를레(orle)입니다. 오를레는 클라이밍 전문 의류 브랜드로서 새로운 도전을 지지하고 성취의 순간을 함께하는 단짝 친구 🙌 입니다. ORLE 와 함께 도전을 표현해보세요!",
             link: 'https://smartstore.naver.com/orleclimbing',
@@ -575,6 +577,7 @@
             name: 'Toe & Sole (토앤솔)',
             logo: 'images/toeandsole-logo-removebg.png',
             description: '발을 지키는 작은 습관, 삶을 바꾸는 큰 변화, 토앤솔입니다. 클라이머의 발, 이제 제대로 관리할 때! 현직 피부과 전문의가 개발한 향긋한 레몬 그라스향 풋케어 스프레이를 만나보세요.',
+            w:200,h:80,
             link: 'https://toesole.com/',
             prizeImage: 'images/toeandsole-spray-marketing.jpg'
           },
@@ -583,6 +586,7 @@
             name: 'CraftHowl (공방하울)',
             logo: 'images/crafthowl-logo.png',
             description: '클라이밍에 미친 공방, 공방하울입니다. 암장에서 사용하는 홀드와 같은 재료, 공정으로 제작되는 아이템과 곧 출시되는 초크 소식이 궁금하시다면 공방하울을 방문해주세요.',
+            w:200,h:80,
             link: 'https://www.crafthowl.com/',
             prizeImage: 'images/crafthowl-keyring-marketing.jpg'
           },
@@ -591,6 +595,7 @@
             name: 'BoulderLand',
             logo: 'images/boulderland-logo.png',
             description: "실내클라이밍, '볼더링'만을 위한 클라이밍 용품점, 볼더랜드입니다. 클라이머가 행복한 공간, 클라이밍 용품이 필요하실 땐 볼더랜드를 들려주세요. 'WELCOME TO BOULDERLAND'.",
+            w:240,h:80,
             link: 'https://boulderland.kr/',
             prizeImage: 'images/boulderland-marketing.jpg'
           }
