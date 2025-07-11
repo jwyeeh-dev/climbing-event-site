@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>교류전 리더보드</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-slate-100 min-h-screen py-10">
+
+  <h1 class="text-3xl font-bold text-center mb-8">🏆 실시간 리더보드</h1>
+
+  <div x-data="board()" class="max-w-md mx-auto">
+    <table class="w-full text-center text-sm bg-white rounded-2xl shadow overflow-hidden">
+      <thead class="bg-slate-200">
+        <tr>
+          <th class="py-2">순위</th>
+          <th class="py-2">팀</th>
+          <th class="py-2">점수</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="(t, idx) in ranking" :key="t.id">
+          <tr :class="idx % 2 ? 'bg-slate-50' : ''">
+            <td class="py-2 font-semibold" x-text="idx + 1"></td>
+            <td class="py-2" x-text="t.name + '조'"></td>
+            <td class="py-2 font-bold text-blue-600" x-text="t.total"></td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+
+    <!-- 새로고침 안내 -->
+    <p class="mt-4 text-center text-xs text-gray-500">
+      스태프가 점수를 입력한 뒤 <strong>페이지를 다시 고침</strong> 하면 최신 순위가 반영됩니다.
+    </p>
+  </div>
+
+  <script>
+    function board () {
+      return {
+        ranking: [],
+
+        init () {
+          const raw = localStorage.getItem('leaderboardData');
+          if (!raw) return;
+
+          try {
+            const teams = JSON.parse(raw);
+            this.ranking = teams
+              .sort((a, b) => b.total - a.total); // 점수 내림차순
+          } catch (e) {
+            console.error('데이터 파싱 오류', e);
+          }
+        }
+      };
+    }
+  </script>
+</body>
+</html>

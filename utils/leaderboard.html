@@ -6,37 +6,52 @@
   <title>실시간 리더보드</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- 애니메이션 정의 -->
   <style>
-    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-    .rank-1 { background-color: #FFD700; color: #000; }
-    .rank-2 { background-color: #C0C0C0; color: #000; }
-    .rank-3 { background-color: #CD7F32; color: #fff; }
+    @keyframes slideUp {
+      0%   { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0);    opacity: 1; }
+    }
+    @keyframes slideDown {
+      0%   { transform: translateY(-20px); opacity: 0; }
+      100% { transform: translateY(0);     opacity: 1; }
+    }
+    .rank-up   { animation: slideUp   0.8s ease-out; }
+    .rank-down { animation: slideDown 0.8s ease-out; }
+
+    /* 메달 배경 */
+    .rank-1 { background:#FFD700;color:#000; }
+    .rank-2 { background:#C0C0C0;color:#000; }
+    .rank-3 { background:#CD7F32;color:#fff; }
   </style>
 </head>
 <body class="bg-gray-100">
 
-  <div x-data="leaderboard()" x-init="init()" class="max-w-4xl mx-auto p-8">
-    <h1 class="text-4xl font-extrabold text-center mb-2 text-gray-800">실시간 순위</h1>
-    <p class="text-center text-gray-500 mb-10">점수는 5초마다 자동으로 업데이트됩니다.</p>
+  <div x-data="board()" x-init="init()" class="max-w-4xl mx-auto p-8">
+    <h1 class="text-4xl font-extrabold text-center mb-2 text-gray-800">🏆 실시간 리더보드</h1>
+    <p class="text-center text-gray-500 mb-10">5초마다 자동 업데이트</p>
 
     <div class="bg-white shadow-2xl rounded-2xl overflow-hidden">
       <div class="divide-y divide-gray-200">
-        <template x-for="(team, index) in sortedScores" :key="team.team">
-          <div class="flex items-center p-5 transition duration-300 ease-in-out hover:bg-gray-50">
+        <!-- 순위별 행 -->
+        <template x-for="team in ranking" :key="team.id">
+          <div
+            class="flex items-center p-5 transition-all duration-500"
+            :class="[
+              team.rankClass,
+              team.movement === 'up'   ? 'rank-up'   :
+              team.movement === 'down' ? 'rank-down' : '' ]"
+          >
             <div class="w-16 h-16 flex items-center justify-center text-2xl font-bold rounded-full mr-6"
-                 :class="{
-                    'rank-1': team.rank === 1,
-                    'rank-2': team.rank === 2,
-                    'rank-3': team.rank === 3,
-                    'bg-gray-200': team.rank > 3
-                 }">
+                 :class="team.medalClass">
               <span x-text="team.rank"></span>
             </div>
             <div class="flex-1">
-              <p class="text-xl font-semibold text-gray-800" x-text="team.team + '조'"></p>
+              <p class="text-xl font-semibold text-gray-800" x-text="team.name + '조'"></p>
             </div>
             <div class="text-3xl font-bold text-orange-600">
-              <span x-text="team.score"></span>
+              <span x-text="team.total"></span>
               <span class="text-lg text-gray-500">점</span>
             </div>
           </div>
@@ -44,44 +59,54 @@
       </div>
     </div>
 
-    <div class="text-center mt-8">
-        <a href="index.html" class="text-orange-600 hover:underline">메인 페이지로 돌아가기</a>
-    </div>
+    <p class="mt-6 text-center text-xs text-gray-500">
+      점수가 변경된 뒤 새로고침 없이도 5초 내로 애니메이션과 함께 순위가 갱신됩니다.
+    </p>
   </div>
 
   <script>
-    function leaderboard() {
+    function board () {
       return {
-        scores: [],
-        get sortedScores() {
-          // 점수를 기준으로 내림차순 정렬
-          const sorted = [...this.scores].sort((a, b) => b.score - a.score);
-          // 순위 부여
+        teams: [],           // 원시 데이터
+        ranking: [],         // 정렬·가공 후 보여줄 배열
+        prevRanks: {},       // team.id ➜ 직전 랭크
+
+        /* localStorage 에서 읽어오기 */
+        load () {
+          const raw = localStorage.getItem('leaderboardData');
+          if (!raw) return;
+          try { this.teams = JSON.parse(raw); }
+          catch (e) { console.error('파싱 오류', e); }
+        },
+
+        /* 랭킹·애니메이션 계산 */
+        updateRanking () {
+          // 점수 내림차순 → 랭크 부여
+          const sorted = [...this.teams].sort((a, b) => b.total - a.total);
           let rank = 1;
-          for (let i = 0; i < sorted.length; i++) {
-            if (i > 0 && sorted[i].score < sorted[i-1].score) {
-              rank = i + 1;
-            }
-            sorted[i].rank = rank;
-          }
-          return sorted;
+          sorted.forEach((t, i) => {
+            if (i > 0 && t.total < sorted[i-1].total) rank = i + 1;
+            const prev = this.prevRanks[t.id] || rank;
+            t.rank      = rank;
+            t.movement  = rank < prev ? 'up' : rank > prev ? 'down' : 'same';
+            t.medalClass = rank <= 3 ? `rank-${rank}` : 'bg-gray-200';
+            this.prevRanks[t.id] = rank;
+          });
+          this.ranking = sorted;
         },
-        updateScores() {
-          const data = localStorage.getItem('climbingLeaderboard');
-          if (data) {
-            this.scores = JSON.parse(data);
-          }
-        },
-        init() {
-          this.updateScores();
-          // 5초마다 점수 업데이트
+
+        /* 초기화 */
+        init () {
+          this.load();
+          this.updateRanking();
+          // 5초마다 새로 불러와 갱신
           setInterval(() => {
-            this.updateScores();
+            this.load();
+            this.updateRanking();
           }, 5000);
         }
-      }
+      };
     }
   </script>
-
 </body>
 </html>
