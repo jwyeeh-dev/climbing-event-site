@@ -177,7 +177,7 @@
   </section>
 
   <!-- Teams Section -->
-  <section id="teams" class="bg-slate-50">
+  <section id="teams" class="relative bg-slate-50">
     <div x-data="teamSearch()" x-init="init()" class="scroll-mt-16 max-w-6xl mx-auto px-6 lg:px-8 py-20" data-aos="fade-up">
       <h2 class="text-3xl font-bold text-gray-900 text-center mb-4">조 편성</h2>
       <p class="text-center text-gray-600 mb-12">이름을 검색하여 소속 조를 확인하세요.</p>
@@ -185,13 +185,20 @@
       <!-- Search Input -->
       <div class="max-w-md mx-auto mb-12">
         <div class="relative">
-          <input
+          <!-- <input
             type="text"
             x-model="searchQuery"
             @input.debounce.300ms="search()"
             placeholder="이름을 입력하세요..."
             class="w-full px-4 py-3 pr-10 text-gray-700 bg-white border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
+          /> -->
+          <!-- 🔒 검색 비활성화: disabled 추가 -->
+          <input
+            type="text"
+            disabled
+            placeholder="이름으로 검색"
+            class="w-full sm:w-80 border rounded px-3 py-2 mb-6 opacity-60 cursor-not-allowed"
+          >
           <svg class="absolute top-1/2 right-4 transform -translate-y-1/2 w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
           </svg>
@@ -216,6 +223,17 @@
       </template>
       </div>
     </div>
+
+    <!-- 📌 7월 18일 공개 오버레이 -->
+    <div
+      class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center
+           select-none"
+      style="z-index: 10;"
+    >
+      <p class="text-white text-2xl font-semibold text-center">
+      조&nbsp;편성은&nbsp;7월&nbsp;18일에&nbsp;공개됩니다.
+    </p>
+  </div>
   </section>
 
   <!-- Programs Section (규칙 공개 전 오버레이 추가) -->
