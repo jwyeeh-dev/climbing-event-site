@@ -48,6 +48,7 @@
       opacity: 0;
       transform: translateY(20px);   /* 아래쪽으로 살짝 숨김 */
     }
+    .sponsor-logo{max-width:10rem;max-height:4rem;object-fit:contain;}
   </style>
 </head>
 <!-- <body class="bg-slate-50 text-gray-800"> -->
@@ -431,7 +432,7 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 items-center">
         <template x-for="sponsor in sponsors" :key="sponsor.id">
           <div @click="openModal(sponsor)" class="flex justify-center items-center h-20 cursor-pointer">
-            <img :src="sponsor.logo" :alt="sponsor.name" :width="sponsor.w" :height="sponsor.h" class="max-h-full max-w-full object-contain sponsor-logo"/>
+            <img :src="sponsor.logo" :alt="sponsor.name" class="h-16 w-auto max-h-full max-w-full object-contain sponsor-logo"/>
           </div>
         </template>
       </div>
