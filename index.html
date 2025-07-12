@@ -432,7 +432,7 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 items-center">
         <template x-for="sponsor in sponsors" :key="sponsor.id">
           <div @click="openModal(sponsor)" class="flex justify-center items-center h-20 cursor-pointer">
-            <img :src="sponsor.logo" :alt="sponsor.name" class="h-16 w-auto max-h-full max-w-full object-contain sponsor-logo"/>
+            <img :src="sponsor.logo" :alt="sponsor.name" class="h-24 w-48 max-h-full max-w-full object-contain sponsor-logo"/>
           </div>
         </template>
       </div>
